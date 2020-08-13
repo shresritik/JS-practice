@@ -1,6 +1,6 @@
 showobj();
 let addbtn = document.getElementById('addbtn')
-
+let addtitle = document.getElementById('addtitle')
 addbtn.addEventListener('click', function (e) {
     let addtxt = document.getElementById('addtxt')
     let notes = localStorage.getItem('notes')
@@ -10,7 +10,11 @@ addbtn.addEventListener('click', function (e) {
     else {
         notesobj = JSON.parse(notes);
     }
-    notesobj.push(addtxt.value)
+    myobj={
+        title:addtitle.value,
+        text:addtxt.value
+    }
+    notesobj.push(myobj)
     localStorage.setItem('notes', JSON.stringify(notesobj));
     showobj();
     addtxt.value=""
@@ -29,8 +33,8 @@ function showobj() {
     notesobj.forEach((element, index) => {
         html += ` <div class="card notecard" style="width: 18rem;">
         <div class="card-body">
-        <h5 class="card-title">Notes ${index+1}</h5>
-        <p class="card-text">${element}</p>
+        <h5 class="card-title">${element.title}</h5>
+        <p class="card-text">${element.text}</p>
         <button id='${index}' onclick='deletefunc(this.id)' class="btn btn-primary">Delete</button>
     </div></div>`;
 
@@ -57,6 +61,7 @@ function deletefunc(index){
 
     showobj();
 }
+
 let search=document.getElementById('search');
 search.addEventListener('input',function(){
     let inputval=search.value.toLowerCase();
@@ -65,8 +70,8 @@ search.addEventListener('input',function(){
 
     Array.from(notecard).forEach(function(element){
         let cardtxt=element.getElementsByTagName("p")[0].innerText;
-       
-        if (cardtxt.includes(inputval)){
+        let cardtxt2=element.getElementsByTagName("h5")[0].innerText;
+        if (cardtxt.includes(inputval) || cardtxt2.includes(inputval)){
             element.style.display='block';
         }
         else{

@@ -40,12 +40,14 @@
     <!-- Navar ends -->
     <br>
     <div class="container-fluid">
+        <h2>Title of Your Note</h2>
+        <input class="form-control" type="text" id='addtitle' placeholder="Title of Your Note">
         <h2>Write Your Notes</h2>
        
         <div class="form-group">
          
             <textarea class="form-control" required id="addtxt" rows="3" ></textarea>
-            <button id='addbtn' class="btn btn-primary">Add Text</button>
+            <button id='addbtn' class="btn btn-primary" onclick='submit()' type='submit'>Add Text</button>
         </div>
     </div>
     <!-- card starts -->
